@@ -1,48 +1,17 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const express = require('express');
+const routes = require('./routes');
+const sequelize = require('./config/connection');
 
-// create our User model
-class User extends Model { }
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-User.init(
-    {
-        // define an id column
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true
-        },
-        // define a username column
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        // define an email column
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validate: {
-                isEmail: true
-            }
-        },
-        // define a password column
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [4]
-            }
-        }
-    },
-    {
-        sequelize,
-        timestamps: false,
-        freezeTableName: true,
-        underscored: true,
-        modelName: 'user'
-    }
-);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-module.exports = User;
+// turn on routes
+app.use(routes);
+
+// turn on connection to db and server
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log('Now listening'));
+});
