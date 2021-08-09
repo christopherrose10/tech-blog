@@ -23,3 +23,6 @@ SO THAT I can publish articles, blog posts, and my thoughts and opinions
 * CSS
 
 ## Contribution
+Made by [Chris Rose]
+
+### ©️2021 Chris Rose
