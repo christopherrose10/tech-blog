@@ -4,9 +4,6 @@ module.exports = {
             date
         ).getFullYear()}`;
     },
-
-
-
     format_date: date => {
         // same logic as before...
     },
@@ -17,7 +14,6 @@ module.exports = {
 
         return word;
     },
-
     format_url: url => {
         return url
             .replace('http://', '')
@@ -25,5 +21,5 @@ module.exports = {
             .replace('www.', '')
             .split('/')[0]
             .split('?')[0];
-    },
-}
+    }
+};
