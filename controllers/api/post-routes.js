@@ -6,7 +6,7 @@ const withAuth = require('../../utils/auth');
 // get all users
 router.get('/', (req, res) => {
   Post.findAll({
-    attributes: ['id', 'post_url', 'title', 'created_at'],
+    attributes: ['id', 'content', 'title', 'created_at'],
     order: [['created_at', 'DESC']],
     include: [
       {
@@ -31,11 +31,12 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
+  console.log(req.params.id);
   Post.findOne({
     where: {
       id: req.params.id
     },
-    attributes: ['id', 'post_url', 'title', 'created_at'],
+    attributes: ['id', 'content', 'title', 'created_at'],
     include: [
       {
         model: Comment,
@@ -65,6 +66,8 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', withAuth, (req, res) => {
+  console.log(req.body);
+  console.log(req);
 
   Post.create({
     title: req.body.title,
