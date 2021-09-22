@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+
 router.get('/', (req, res) => {
     console.log(req.session);
     Post.findAll({
